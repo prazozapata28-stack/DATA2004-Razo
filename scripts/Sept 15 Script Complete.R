@@ -171,9 +171,24 @@ fishing_long |>
   print(width = Inf)
 
 # Now let's break. Choose a different sheet in the spreadsheet. 
-# What is the grain? 
-# What is the total catch for that lake? 
-## What distinct regions are you left with? 
-## How many rows did you start with? How many did your pivot have?
+library(readr)
+ontario <- read_csv("ontario(Ontario).csv")
 
-## grain: 
+# What is the grain? The grain is only NY for US, only Ontario for canada, and US and canada together in the Grand total
+# What is the total catch for that lake? 
+ontario |> 
+  summarise(sum(`Grand Totals`, na.rm = TRUE)) #381489.
+
+## What distinct regions are you left with? US and Canada
+## How many rows did you start with? How many did your pivot have?
+ontario_long <- ontario |> 
+  pivot_longer(
+    cols = c(`U.S. Total (NY)`, `Canada (ONT)`),
+    names_to = "Region",
+    values_to = "Caught"
+  )
+
+nrow(ontario)
+nrow(ontario_long)
+## grain: only city based
+     
