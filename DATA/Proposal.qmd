@@ -1,0 +1,22 @@
+---
+title: "Proposal"
+author: "Paulina Razo-Zapata"
+format: html
+editor: visual
+---
+
+## Mental Health on a Large Scale Proposal
+
+Mental health is a new topic as far as awareness and helping people feel not alone or isolated in their own feelings. It has been discovered that changes in behavior and memory can actually be because of a predisposition to a genetic environment or epigenetics from the environment. Mental health is not restricted to the developed countries and areas around the world that have the ability to diagnose and treat mental illnesses. Mental illness is a relatively new topic of research that spans across the globe.
+
+What I am interested in is the trends of mental health illnesses across the globe in different areas and countries. This would be important to bring awareness to different countries as it is a very real thing. I also wonder if certain behaviors in mental illness seem like they could be caused by the environment to determine what might need to be changed in the environment. Public health and wellbeing has been an interest of mine since the wellness of our populations affect how we behave in our environment, so acknowledging and bringing awareness to the environment is crucial.
+
+I have found two data sets over mental illness. One has data that shows the documented percentage of people in different countries with a mental illness (Schizophrenia, Bipolar disorder, Eating disorder, Anxiety disorder, Drug Use disorder, Depression disorder, Alcohol use disorder). This will aid in discovering the trends of different countries. The other data set shows the different behaviors associated with the different mental disorders (Irritability, low energy, thoughts of death, muscle tension, sleep disturbances, changes in weight, difficulty concentrating, feeling of worthlessness, low mood). The behaviors might help reason the profile of a country or help research discover why there are more tendencies for specific mental disorders in some countries rather than others.
+
+I intend to also do some research to hone in on why some countries might have greater tendencies for mental disorders than others. My goal is to be able to deeply discuss a prevalent disorder in three countries, so my research question is then: which mental disorders in countries are caused by environmental factors on epigenetics that can be approached or genetic factors in the generational passing or genetic information?
+
+Hopefully, once these data sets are able to help me narrow which countries to research, I will find other data sets that focus more specifically on the countries or areas selected. I foresee an issue where there are so many countries with similar rates for the same mental disorder, so I will select countries that have more research and higher mental disorder percentages. I also foresee the issue that joining the data sets might not go very smoothly. If I struggle to join the datasets, it will likely be because I did not organize one of them properly to allow for a successful join. To make it easier on myself, I might create my own dataset with the mental disorders and associated behaviors.
+
+If I find that the project as a whole is not successful in finding three countries to further research, I will focus on mental health behaviors and everyday adjustments and treatments that have helped people with the disorders improve their quality of life.
+
+By the end of the project, I intend to have three countries with prevalent mental disorders and discover with research about the different behaviors that might be the case. I would like to be able to present strategies to lower the percentage of the mental illness for the respected country. To do this, I may also look at the countries with the lowest percentages of mental illness and compare the profiles of the countries to discover why that country has fewer numbers.
