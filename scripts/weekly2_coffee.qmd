@@ -1,0 +1,230 @@
+---
+title: "Weekly 2: Coffee Ratings"
+author: "[Name]"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+## Overview
+
+You want to know which producers grow the best-rated coffee.
+
+That sounds like a `group_by()` and a `summarise()`. The problem is that `producer` was typed by different people in different ways, so the same producer can appear under several labels, and some labels are not producers at all.
+
+Your job is to work out how much of that you can fix, how much you shouldn't, and what that does to the answer.
+
+A few things:
+
+1.  Add `#| echo: false` to your code blocks.
+2.  Use a new block when you move to a new task.
+3.  Code goes in the blocks. **Answers go outside them**, as prose. A comment inside a code chunk is not an answer.
+4.  Keep the original `producer` column. Every cleaned version goes in a **new** column.
+
+Due Monday at 8pm.
+
+## Your data
+
+Import `coffee_ratings.csv` and inspect it.
+
+```{r}
+#| warning: false
+
+library(tidyverse)
+setwd("C:/Users/pauli/OneDrive/Documents/DATA2004-Razo")
+coffee_ratings<- read_csv("../DATA/coffee_ratings.csv")
+```
+
+## Before you start
+
+> What does one row represent?
+>
+> one coffee cup that was observed and rated
+
+> Is there a column that uniquely identifies a row? How would you check?
+>
+> There does not appear to be some sort of unique id for each rating n_distinct and n_rows are not the same for total cup points or any other variable in the data set
+
+```{r}
+
+nrow(coffee_ratings)
+
+coffee_ratings |> 
+  sapply(n_distinct)
+```
+
+> Is `producer` a key? What does it mean that the same producer can appear on many rows?
+>
+> Producer is the company that produces the type of coffee (the brand) of each coffee tried and there is allowed to be the same producer for multiple samples of coffee because the same coffee could've been tried multiple times and the producer might produce more than one brand of coffee.
+
+## How many producers?
+
+Count the distinct values of `producer`.
+
+```{r}
+#| warning: false
+
+coffee_ratings |> 
+  summarise(n_distinct(producer))
+
+```
+
+> How many distinct values are there? there are 692 distinct values for producer
+
+> How many rows have no producer recorded? Does your distinct count include "missing" as one of its values? How would you check?
+
+> Why shouldn't you read that number as the number of distinct producers?
+>
+> because there are the same producers for some samples but they were spelled likely slightly different
+
+## Normalize the representation
+
+Create a new column, `producer_clean`, that makes the producer labels consistent in case and whitespace. Keep `producer`.
+
+```{r}
+#| warning: false
+
+coffee_ratings<- coffee_ratings |> 
+  mutate(producer_clean = producer |> 
+           str_to_upper() |> 
+           str_squish())
+```
+
+> How many distinct values does `producer_clean` have?
+
+```{r}
+
+coffee_ratings |> 
+  summarise(n_distinct(producer_clean))
+```
+
+> Is that the number of producers now? What does the reduction establish, and what does it *not* establish?
+
+## Which labels actually merged?
+
+A single number doesn't tell you what happened. Build a table showing every `producer_clean` value that more than one raw `producer` value was combined into, along with the raw values that went into it.
+
+```{r}
+#| warning: false
+
+coffee_ratings |> 
+  group_by(producer_clean) |> 
+  distinct(producer, producer_clean) |> 
+  filter(n()>1)
+
+```
+
+> How many cleaned labels absorbed more than one raw label? 48
+
+> Look through them. Is every merge one you would stand behind? No some still need to be merged
+
+> Is this table more useful than knowing the number of labels went down? Why? Sure, but it wasnt as many as i thought but it will give a better idea of the quality of the coffee each company is producing
+
+## Does it change anything?
+
+Compare the La Plata coffees before and after normalizing. For each version, report the number of coffees and the mean and median `total_cup_points`.
+
+```{r}
+#| warning: false
+
+coffee_ratings |> 
+  distinct(producer)
+
+coffee_ratings |> 
+  filter(producer_clean== "LA PLATA") |> 
+  summarise(mean(total_cup_points, na.rm = TRUE),
+            median(total_cup_points, na.rm = TRUE))
+
+coffee_ratings |> 
+  filter(producer== "LA PLATA") |> 
+  summarise(mean(total_cup_points, na.rm = TRUE),
+            median(total_cup_points, na.rm = TRUE))
+
+coffee_ratings |> 
+  filter(producer== "La Plata") |> 
+  summarise(mean(total_cup_points, na.rm = TRUE),
+            median(total_cup_points, na.rm = TRUE))
+```
+
+> What changed more: the number of coffees or the average score? the median changed more
+
+> Suppose you had reported how many coffees La Plata produced using the raw column. How far off would you have been? not too far off, it stayed at about 83
+
+## What case and whitespace didn't catch
+
+Some labels still differ only in punctuation, i.e., a period, a comma, a slash.
+
+Sort the distinct values of `producer_clean` and read through them. Near-duplicates end up next to each other.
+
+```{r}
+#| warning: false
+
+coffee_ratings |> 
+  distinct(producer_clean) |> 
+  arrange(producer_clean)
+```
+
+> Find at least **three** pairs of labels that differ only in punctuation.
+>
+> Agricola El Pilar SA, Agricola Monte Verde, Agricola Nueva Granada
+
+Now use exact replacement to make each pair consistent. Change only the values you identified and nothing else.
+
+```{r}
+#| warning: false
+
+```
+
+> For each change, say why you're confident it's the same producer.
+
+> How long did it take to find those by reading? How many labels did you have to look at?
+
+## The top producers
+
+Using `producer_clean`, find the ten producers with the most coffees in the data.
+
+```{r}
+#| warning: false
+
+coffee_ratings |>
+  count(producer_clean, sort = TRUE) |>
+  slice_head(n = 10)
+```
+
+Look at that list carefully.
+
+> Is every entry in it a producer? If not, which ones aren't, and what do they mean? no some have lots of producers or none listed at all
+
+> Is any single producer split across more than one row of the list? yes, ipanema appears twice
+
+Now look at these four raw labels:
+
+- Ipanema Agricola
+- Ipanema Agricola S.A
+- Ipanema Agrícola SA
+- Ipanema Coffees
+
+> Should these be combined into one producer? **Don't recode them.** Explain whether combining them would be normalization or classification, and what evidence you'd need before doing it.
+>
+> You would need more evidence before combining them. You would need evidence that they are all indeed the same which could be ceo information, location, anything that identifies
+
+> If you did combine them, what would happen to your top-ten list?
+>
+> it would move ipanema to the top of the list because it would have the most coffee entries
+
+## What this means for your question
+
+> A classmate says: "I reduced the producer column from 692 labels to 666, so the cleaned column is better." Is that justified? Explain.
+>
+> no because there could still be repeats. only some easy labels were combined but it wouldn't be clean until we were sure all the remaining producers were each individually unique
+
+> You set out to find which producers grow the best-rated coffee. Given everything above, what would you need to tell someone before they trusted your answer? there are some coffees that do not give producer or specific producer information with good rated coffee. there also seems to be some unclean data that could scew results of the best coffee.
+
+## Disclosure appendix
+
+> What did you try first? Include the code you wrote and the actual error message, or a clear description of the problem if there was no error.
+
+> If you used an AI system: the exact prompt, exactly what it returned, what it got wrong or left unclear, and what you changed.
+
+> If you didn't use one, say so.
