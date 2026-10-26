@@ -1,0 +1,14 @@
+---
+title: "Feasibility Report"
+author: "Paulina Razo-Zapata"
+format: html
+editor: visual
+---
+
+## Feasibility Report
+
+Mental Health is a matter of diseases that is viewed separately and viewed differently than other straightforward, physical diseases especially across different cultures. This may translate into geographic patterns about the prevalence of mental health disorders, but another reason for a variation of mental health prevalence (if there is one) might be the diagnostic capabilities of different countries and the resources they have to treat it. How does different access to resources and treatment for mental health disorders affect the prevalence of the disorders across countries.
+
+The first set of data I found simply shows the disease prevalence of several different mental disorders and the risk associated with them. This data comes from the Institute of Health Metrics and Evaluation. They take data from over 200 countries and the global burden of disease results from previous years to see trends over time. The grain is generalizing hundreds of thousands of people from one specific country. There is a lot to this data than just the prevalence of specific diseases that will need to be filtered out because we are not doing gender or age studies. The quality of the data could be at risk because it could be different how different countries report different diseases and if they all acknowledge different diseases the same. This data set seems very simple for straight forward data, the only issue is getting the access. Special permission needs to be given to be able to access and utilize that data that is accepted by R. For this reason, there is a possibility that this data set might not be accessible, so I would need to determine the next most reliable data that shows prevalence of mental disorders.
+
+Another data frame is from the Service Availability and Readiness Assessment from the World Health Organization that monitors an area's ability to provide health sanctionsThey derive their information from random health facilities around the world to generalize their information onto their respective areas and countries. They ensure sufficient access to different tests, labs and providers per capita. I wonder if this data gets specific to certain types of mental disorders that would be more helpful to zoom in on because navigating the grain is difficult. It is widespread but it is hard to determine the detail of the data like down to the number of hours service workers are able to work for example. I think there should be data sets that show the resources available to different countries, but I doubt it is so easily maintained as it would be with the World Health Organization.
